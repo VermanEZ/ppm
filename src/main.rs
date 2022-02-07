@@ -60,7 +60,7 @@ fn draw_solid_circle(pixels: &mut [u32], foreground_color: u32, background_color
         }
     }
 }
-// Uses
+// Uses midpoint circle algorithm
 // done with integer subpixel computations like in solid circle
 fn draw_hollow_circle(pixels: &mut [u32], foreground_color: u32, background_color: u32, width: usize, height: usize, radius: usize) {
     pixels.fill(background_color);
