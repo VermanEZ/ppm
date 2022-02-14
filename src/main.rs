@@ -101,6 +101,30 @@ fn draw_hollow_circle(pixels: &mut [u32], foreground_color: u32, background_colo
     }
 }
 
+fn draw_vertical_stripes(pixels: &mut [u32], foreground_color: u32, background_color: u32, width: usize, height: usize, tile_size: usize) {
+    for y in 0..width {
+        for x in 0..height {
+            pixels[y * width + x] = if x % (tile_size * 2) < tile_size {
+                foreground_color
+            } else {
+                background_color
+            }
+        }
+    }
+}
+
+fn draw_horizontal_stripes(pixels: &mut [u32], foreground_color: u32, background_color: u32, width: usize, height: usize, tile_size: usize) {
+    for y in 0..width {
+        for x in 0..height {
+            pixels[y * width + x] = if y % (tile_size * 2) < tile_size {
+                foreground_color
+            } else {
+                background_color
+            }
+        }
+    }
+}
+
 fn main() {
     const WIDTH: usize = 512;
     const HEIGHT: usize = 512;
@@ -126,4 +150,10 @@ fn main() {
     pixels.fill(0x00FF00);
     draw_hollow_circle(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, RADIUS);
     save_as_ppm("hollow_circle.ppm", &pixels, WIDTH, HEIGHT).unwrap();
+    pixels.fill(0x00FF00);
+    draw_vertical_stripes(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, TILE_SIZE);
+    save_as_ppm("vertical_stripes.ppm", &pixels, WIDTH, HEIGHT).unwrap();
+    pixels.fill(0x00FF00);
+    draw_horizontal_stripes(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, TILE_SIZE);
+    save_as_ppm("horizontal_stripes.ppm", &pixels, WIDTH, HEIGHT).unwrap();
 }
