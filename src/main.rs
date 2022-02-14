@@ -20,7 +20,7 @@ fn save_as_ppm(file_path: &str, pixels: &[u32], width: usize, height: usize) -> 
     Ok(())
 }
 
-fn draw_check_pattern(pixels: &mut [u32], foreground_color: u32, background_color: u32,  width: usize, height: usize, tile_size: usize) {
+fn draw_checker_pattern(pixels: &mut [u32], foreground_color: u32, background_color: u32,  width: usize, height: usize, tile_size: usize) {
     for y in 0..width {
         for x in 0..height {
             pixels[y * width + x] = if (x / tile_size + y / tile_size) % 2 == 0 {
@@ -32,7 +32,7 @@ fn draw_check_pattern(pixels: &mut [u32], foreground_color: u32, background_colo
     }
 }
 
-fn draw_stripe_pattern(pixels: &mut [u32], foreground_color: u32, background_color: u32, width: usize, height: usize, tile_size: usize) {
+fn draw_diagonal_stripes(pixels: &mut [u32], foreground_color: u32, background_color: u32, width: usize, height: usize, tile_size: usize) {
     for y in 0..width {
         for x in 0..height {
             pixels[y * width + x] = if ((x + y) / tile_size) % 2 == 0 {
@@ -136,12 +136,12 @@ fn main() {
 
 
     pixels.fill(0x00FF00);
-    draw_check_pattern(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, TILE_SIZE);
-    save_as_ppm("check_pattern.ppm", &pixels, WIDTH, HEIGHT).unwrap();
+    draw_checker_pattern(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, TILE_SIZE);
+    save_as_ppm("checker_pattern.ppm", &pixels, WIDTH, HEIGHT).unwrap();
 
     pixels.fill(0x00FF00);
-    draw_stripe_pattern(&mut pixels,FOREGROUNG_COLOR, BACKGROUND_COLOR,WIDTH, HEIGHT, TILE_SIZE);
-    save_as_ppm("stripe_pattern.ppm", &pixels, WIDTH, HEIGHT).unwrap();
+    draw_diagonal_stripes(&mut pixels,FOREGROUNG_COLOR, BACKGROUND_COLOR,WIDTH, HEIGHT, TILE_SIZE);
+    save_as_ppm("diagonal_stripes.ppm", &pixels, WIDTH, HEIGHT).unwrap();
 
     pixels.fill(0x00FF00);
     draw_solid_circle(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, RADIUS);
@@ -150,9 +150,11 @@ fn main() {
     pixels.fill(0x00FF00);
     draw_hollow_circle(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, RADIUS);
     save_as_ppm("hollow_circle.ppm", &pixels, WIDTH, HEIGHT).unwrap();
+
     pixels.fill(0x00FF00);
     draw_vertical_stripes(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, TILE_SIZE);
     save_as_ppm("vertical_stripes.ppm", &pixels, WIDTH, HEIGHT).unwrap();
+
     pixels.fill(0x00FF00);
     draw_horizontal_stripes(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, TILE_SIZE);
     save_as_ppm("horizontal_stripes.ppm", &pixels, WIDTH, HEIGHT).unwrap();
