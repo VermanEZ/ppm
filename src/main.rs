@@ -125,6 +125,20 @@ fn draw_horizontal_stripes(pixels: &mut [u32], foreground_color: u32, background
     }
 }
 
+fn draw_eyes(pixels: &mut [u32], foreground_color: u32, background_color: u32, width: usize, height: usize, resolution: usize) {
+    for y in 0..width {
+        for x in 0..height {
+            let shx = x + 1;
+            let shy = y + 1;
+            pixels[y * width + x] = if ((shx * shy) % (resolution + (resolution % 2 == 0) as usize) + shx * shy) % 2 == 0 {
+                foreground_color
+            } else {
+                background_color
+            }
+        }
+    }
+}
+
 fn main() {
     const WIDTH: usize = 512;
     const HEIGHT: usize = 512;
@@ -158,4 +172,8 @@ fn main() {
     pixels.fill(0x00FF00);
     draw_horizontal_stripes(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, TILE_SIZE);
     save_as_ppm("horizontal_stripes.ppm", &pixels, WIDTH, HEIGHT).unwrap();
+
+    pixels.fill(0x00FF00);
+    draw_eyes(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, 6);
+    save_as_ppm("test.ppm", &pixels, WIDTH, HEIGHT).unwrap();
 }
