@@ -175,5 +175,5 @@ fn main() {
 
     pixels.fill(0x00FF00);
     draw_eyes(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, 6);
-    save_as_ppm("test.ppm", &pixels, WIDTH, HEIGHT).unwrap();
+    save_as_ppm("eyes.ppm", &pixels, WIDTH, HEIGHT).unwrap();
 }
