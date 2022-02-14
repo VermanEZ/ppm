@@ -191,5 +191,5 @@ fn main() {
 
     pixels.fill(0x00FF00);
     draw_fancy_checker(&mut pixels, FOREGROUNG_COLOR, BACKGROUND_COLOR, WIDTH, HEIGHT, 40);
-    save_as_ppm("test.ppm", &pixels, WIDTH, HEIGHT).unwrap();
+    save_as_ppm("fancy_checker.ppm", &pixels, WIDTH, HEIGHT).unwrap();
 }
